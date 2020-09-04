@@ -4,16 +4,60 @@
 	<meta charset="utf-8">
 	<script>
 		// TODO: create a handler
+	function setSearchEngine() {
+		console.log('Searching')
+		let searchEngine = document.querySelector("input[name=engine]:checked")
+		let actions = {
+			'google': 'https://www.google.com',
+			'duckDuckGo': 'https://www.duckduckgo.com',
+			'bing': 'https://www.bing.com',
+			'ask': 'http://ask.com'
+
+		};
+		
+			if (searchEngine) {
+				console.log(searchEngine.id)
+				for (site in actions) {
+					if (site == searchEngine.id) {
+						document.getElementById('searchForm').setAttribute("action", actions[site]);
+					
+						// event.preventDefault()
+					};
+				};
+			};
+			
+			// couldn't figure out how to check if the text box was empty
+			// if (!searchEngine || document.getElementById('q')[0] === '') {
+			// 	alert('You must select a search engine and enter a search term.')
+			// 	event.preventDefault();
+			// }
+			
+		
+	};
     window.addEventListener("load", function(){
         // TODO: register the handler
-    });
+		
+		let form = document.querySelector('form');
+    	form.addEventListener('submit', function(event) {
+		
+		setSearchEngine()
+		
+		});	
+	});
+      
 	</script>
 </head>
 
 <body>
 
 	<form id="searchForm">
-    <!-- TODO: add form elements -->
+	<!-- TODO: add form elements -->
+	<input type='text' name='q'>
+	<label>Google<input id='google' type='radio' name='engine' value='google'/></label>
+	<label>DuckDuckGo<input id='duckDuckGo' type='radio' name='engine' value='duckDuckGo'/></label>
+	<label>Bing<input id='bing' type='radio' name='engine' value='bing'/></label>
+	<label>Ask<input id='ask' type='radio' name='engine' value='ask'/></label>
+	<button type='submit' id='go'>Go!</button>
 	</form>
 
 </body>
